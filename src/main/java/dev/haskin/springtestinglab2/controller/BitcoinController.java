@@ -2,6 +2,7 @@ package dev.haskin.springtestinglab2.controller;
 
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,12 +18,19 @@ public class BitcoinController {
 
     private static final String API_URL = "https://api.coincap.io/v2/assets/bitcoin";
 
+    @Autowired
+    private RestTemplate restTemplate;
+
     @GetMapping
-    String getCostOfOneBitcoin() {
-        RestTemplate restTemplate = new RestTemplate();
+    String getCostOfOneBitcoin() throws ResponseStatusException {
+        // RestTemplate restTemplate = new RestTemplate();
         BitcoinDTO bitcoinDTO = Optional.ofNullable(restTemplate.getForObject(API_URL, BitcoinDTO.class))
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
                         "Could not connect to Bitcoin API"));
         return bitcoinDTO.getData().getPriceUsd();
+    }
+
+    public static String getApiUrl() {
+        return API_URL;
     }
 }

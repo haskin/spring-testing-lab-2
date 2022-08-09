@@ -8,11 +8,11 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 public class BitcoinDTO {
     @JsonProperty("data")
     private DataDTO data;
 }
-
 /*
  * https://api.coincap.io/v2/assets/bitcoin
  * {
