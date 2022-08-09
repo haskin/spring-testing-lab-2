@@ -24,6 +24,5 @@ public class BitcoinControllerIntegrationTest {
                 .andDo(print())
                 .andExpect(content().contentType(MediaType.valueOf("text/plain;charset=UTF-8")))
                 .andExpect(status().isOk());
-        // .andExcept(content().class.equals(String.class));
     }
 }
